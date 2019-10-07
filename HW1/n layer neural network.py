@@ -1,17 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct  7 00:11:13 2019
-
-@author: Robin
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Oct  6 16:14:03 2019
-
-@author: Robin
-"""
-
 __author__ = 'tan_nguyen'
 import numpy as np
 from sklearn import datasets, linear_model
