@@ -10,7 +10,8 @@ def generate_data():
     :return: X: input data, y: given labels
     '''
     np.random.seed(0)
-    X, y = datasets.make_moons(200, noise=0.20)
+    X, y = datasets.make_circles(200, noise=0.05)
+    #X, y = datasets.make_moons(200, noise=0.20)
     return X, y
 
 
@@ -112,7 +113,7 @@ class DeepNeuralNetwork(object):
         if type == 'sigmoid':
             diff_act = np.exp(-z) / np.power((1 + np.exp(-z)), 2)
         if type == 'relu':
-            diff_act = np.zeros(z.shape[0])
+            diff_act = np.zeros(z.shape)
             diff_act[z > 0] = 1
 
         return diff_act
@@ -205,7 +206,7 @@ class DeepNeuralNetwork(object):
             dW[i] = np.transpose(self.a[i - 1]) @ (
                         (delta_n @ np.transpose(self.W[i + 1])) * self.diff_actFun(self.z[i], self.actFun_type))
 
-            delta_n = ((delta_n @ np.transpose(self.W[i + 1])) * self.diff_actFun(self.z[i], self.actFun_type))
+            delta_n = (delta_n @ np.transpose(self.W[i + 1])) * self.diff_actFun(self.z[i], self.actFun_type)
 
             db[i] = np.sum(delta_n, axis=0)
 
@@ -267,9 +268,38 @@ def main():
     plt.scatter(X[:, 0], X[:, 1], s=40, c=y, cmap=plt.cm.Spectral)
     plt.show()
 
-    model = DeepNeuralNetwork(nn_layer_num=3, nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='tanh')
+    #model = DeepNeuralNetwork(nn_layer_num=3, nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='tanh')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
+
+    #model = DeepNeuralNetwork(nn_layer_num=3, nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='sigmoid')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
+
+    #model = DeepNeuralNetwork(nn_layer_num=3, nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='relu')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
+
+
+
+
+    #model = DeepNeuralNetwork(nn_layer_num=1, nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='tanh')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
+
+    #model = DeepNeuralNetwork(nn_layer_num=3, nn_input_dim=2, nn_hidden_dim=50, nn_output_dim=2, actFun_type='tanh')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
+
+    model = DeepNeuralNetwork(nn_layer_num=1, nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='relu')
     model.fit_model(X, y)
     model.visualize_decision_boundary(X, y)
+
+
+
+
+
+
 
 
 if __name__ == "__main__":

@@ -144,7 +144,10 @@ def main():
 
     # Add a scalar summary for the snapshot loss.
     tf.summary.scalar(cross_entropy.op.name, cross_entropy)
-    
+
+    variable_summaries(accuracy, "accuracy")
+    variable_summaries(cross_entropy, "cross_entropy")
+
     variable_summaries(W_conv1,"W_conv1")
     variable_summaries(b_conv1,"b_conv1")
     variable_summaries(h_conv1,"h_conv1")

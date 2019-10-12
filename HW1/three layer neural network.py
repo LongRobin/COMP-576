@@ -82,7 +82,7 @@ class NeuralNetwork(object):
         if type == 'tanh':
             actFunction = np.tanh(z)
         if type == 'sigmoid':
-            actFunction = 1 / (1 + np.exp(-x))
+            actFunction = 1 / (1 + np.exp(-z))
         if type == 'relu':
             actFunction = np.maximum(0, z)
 
@@ -102,7 +102,7 @@ class NeuralNetwork(object):
         if type == 'sigmoid':
             diff_act = np.exp(-z) / np.power((1 + np.exp(-z)), 2)
         if type == 'relu':
-            diff_act = np.zeros(z.shape[0])
+            diff_act = np.zeros(z.shape)
             diff_act[z > 0] = 1
 
         return diff_act
@@ -230,9 +230,22 @@ def main():
     plt.scatter(X[:, 0], X[:, 1], s=40, c=y, cmap=plt.cm.Spectral)
     plt.show()
 
-    model = NeuralNetwork(nn_input_dim=2, nn_hidden_dim=3, nn_output_dim=2, actFun_type='tanh')
+    model = NeuralNetwork(nn_input_dim=2, nn_hidden_dim=10, nn_output_dim=2, actFun_type='tanh')
     model.fit_model(X, y)
     model.visualize_decision_boundary(X, y)
+
+    model = NeuralNetwork(nn_input_dim=2, nn_hidden_dim=100, nn_output_dim=2, actFun_type='tanh')
+    model.fit_model(X, y)
+    model.visualize_decision_boundary(X, y)
+
+
+    #model = NeuralNetwork(nn_input_dim=2, nn_hidden_dim=5, nn_output_dim=2, actFun_type='sigmoid')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
+
+    #model = NeuralNetwork(nn_input_dim=2, nn_hidden_dim=5, nn_output_dim=2, actFun_type='relu')
+    #model.fit_model(X, y)
+    #model.visualize_decision_boundary(X, y)
 
 
 if __name__ == "__main__":
